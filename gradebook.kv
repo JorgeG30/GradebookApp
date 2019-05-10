@@ -1,0 +1,443 @@
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+
+ScreenManagement:
+    LoginPage:
+        id: login_page
+    StudentPage:
+        id: student_page
+    InstructorPage:
+        id: instructor_page
+    StudentSelectionPage:
+        id: student_selection_page
+    InstructorSelectionPage:
+        id: instructor_selection_page
+
+<LoginPage>:
+    name: "login_page"
+    GridLayout:
+        id: login_grid
+        rows: 3
+        cols: 2
+        Label:
+            text: "Username"
+        TextInput:
+            id: login_name
+            multiline: False
+        Label:
+            text: "Password"
+        TextInput:
+            id: login_pass
+            password: True # hide password
+            multiline: False
+        Button:
+            id: student_login
+            text: "Sign in as Student"
+            on_release:
+                app.root.transition = SlideTransition(direction='left')
+                root.verify_student()
+        Button:
+            id: instructor_login
+            text: "Sign in as Instructor"
+            on_release:
+                app.root.transition = SlideTransition(direction='left')
+                root.verify_instructor()
+
+<StudentSelectionPage>:
+    name: "student_selection_page"
+    GridLayout:
+        id: stud_sel_grid
+        rows: 7
+        cols: 4
+        Label:
+            text: "Class Name"
+        Label:
+            text: "Instructor"
+        Label:
+            text: "Start Time"
+        Label:
+            text: "Days of Week"
+        # Button:
+        #     text: "back"
+        #     on_release:
+        #         app.root.transition = SlideTransition(direction='right')
+        #         app.root.current = "login_page"
+        # Button:
+        #     text: "Student Home"
+        #     on_release:
+        #         app.root.transition = SlideTransition(direction='left')
+        #         app.root.current = "student_page"
+
+<StudentPage>:
+    name: "student_page"
+
+    RelativeLayout:
+        size: 960, 1080
+        # canvas:
+        #     Color:
+        #         rgba: 0, 0, 0, 0
+        #     Rectangle: #woohoo!!!
+        #         size: self.size
+        #         #pos: self.pos
+
+        Button:
+            pos: 0, 980
+            size: 960, 100
+            size_hint: None, None
+            text: "Back to Class Selection"
+            on_release:
+                app.root.transition = SlideTransition(direction = 'right')
+                app.root.current = "student_selection_page"
+                app.root.transition = SlideTransition(direction='left')
+        Button:
+            pos: 0, 880
+            size: 960, 100
+            size_hint: None, None
+            text: "Back to Login"
+            on_release:
+                app.root.transition = SlideTransition(direction='right')
+                app.root.current = "login_page"
+                app.root.transition = SlideTransition(direction='left')
+
+
+        Label:
+            size: 240, 100
+            size_hint: None, None
+            pos: 0, 780
+            text: "Name"
+            # canvas:
+            #     #Color:
+            #         #rgba: 1, 0, 1, 1
+            #     Rectangle: #woohoo!!!
+            #         size: self.size
+            #         #pos: self.pos
+        Label:
+            size: 240, 100
+            size_hint: None, None
+            pos: 240, 780
+            text: "Type"
+            # canvas:
+            #     #Color:
+            #         #rgba: 1, 0, 1, 1
+            #     Rectangle: #woohoo!!!
+            #         size: self.size
+            #         pos: self.pos
+        Label:
+            size: 240, 100
+            size_hint: None, None
+            pos: 480, 780
+            text: "Due Date"
+        Label:
+            size: 240, 100
+            size_hint: None, None
+            pos: 720, 780
+            text: "Grade"
+            #size_hint: None, None
+
+
+
+
+    # ScrollView:
+    #     size_hint: None, None
+    #     size: 1920, 880
+    #     pos: 0, 0
+        GridLayout:
+            id: view_assignment_table
+            rows: 50
+            cols: 4
+            size_hint: None, None
+            size: 960, 680
+            pos: 0, 0
+            #height: self.minimum_height
+
+        # Button:
+        #     size: 10,10
+        #     pos: 860, 880
+        #     text: "Back to Login"
+        #     on_release:
+        #         app.root.transition = SlideTransition(direction='right')
+        #         app.root.current = "student_selection_page"
+        #         app.root.transition = SlideTransition(direction='left')
+
+<InstructorSelectionPage>:
+    name: "instructor_selection_page"
+    GridLayout:
+        id: inst_sel_grid
+        rows: 7
+        cols: 3
+        Label:
+            text: "Class Name"
+        Label:
+            text: "Start Time"
+        Label:
+            text: "Days of Week"
+
+<InstructorPage>:
+    name: "instructor_page"
+    RelativeLayout:
+        id: inst_page_rel
+        size: 1400, 1080
+
+        Button:
+            pos: 0, 1030
+            size: 1400, 50
+            size_hint: None, None
+            text: "Back to Class Selection"
+            on_release:
+                app.root.transition = SlideTransition(direction = 'right')
+                app.root.current = "instructor_selection_page"
+                app.root.transition = SlideTransition(direction='left')
+
+        Button:
+            pos: 0, 980
+            size: 1400, 50
+            size_hint: None, None
+            text: "Back to Login"
+            on_release:
+                app.root.transition = SlideTransition(direction='right')
+                app.root.current = "login_page"
+                app.root.transition = SlideTransition(direction='left')
+
+        #Labels for the names of columns
+        Label:
+            size: 280, 50
+            size_hint: None, None
+            pos: 0, 930
+            text: "Student Name"
+
+        Label:
+            size: 280, 50
+            size_hint: None, None
+            pos: 280, 930
+            text: "Assignment Name"
+
+        Label:
+            size: 280, 50
+            size_hint: None, None
+            pos: 560, 930
+            text: "Grade Assigned"
+
+        Label:
+            size: 280, 50
+            size_hint: None, None
+            pos: 840, 930
+            text: "Update Grade"
+
+        Label:
+            size: 280, 50
+            size_hint: None, None
+            pos: 1120, 930
+            text: "Submit Changes"
+
+        ScrollView:
+            #size_hint: None, None
+            size_hint: None, .5
+            size: 1400, 480
+            pos: 0, 390
+            bar_width: 25
+            do_scroll_y: True
+            bar_pos_y: 'left'
+            scroll_type:['bars', 'content']
+            GridLayout:
+                id: instructor_assignment_table
+                pos: 0, 390
+                size_hint: None, None
+                height: self.minimum_height
+                row_force_default: True
+                row_default_height: 50
+                size: 1400,480
+                rows: 50
+                cols: 5
+
+        RelativeLayout:
+            id: add_entry_sec
+            size: 700, 390
+            pos: 0, 0
+
+            Label:
+                text: 'Add or Delete Assignment'
+                size_hint: None, None
+                size: 700, 50
+                pos: 0, 330
+
+            GridLayout:
+                id: add_del_assignment
+                size_hint: None, None
+                size: 700, 330
+                pos: 0, 0
+                rows: 5
+                cols: 3
+                row_default_height: 40
+                Label:
+                    text: 'Assignment Name'
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: 'Assignment Type'
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: 'Due Date'
+                    size_hint: None, None
+                    size: 230, 50
+                TextInput:
+                    id: assign_name_input
+                    multiline: False
+                    size_hint: None, None
+                    size: 230, 50
+                TextInput:
+                    id: assign_type_input
+                    multiline: False
+                    size_hint: None, None
+                    size: 230, 50
+                TextInput:
+                    id: assign_date_input
+                    multiline: False
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Button:
+                    text: 'Create Assignment'
+                    size_hint: None, None
+                    size: 230, 50
+                    on_release: root.create_assignment()
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+        RelativeLayout:
+            id: add_student_sec
+            size: 700, 390
+            pos: 700, 0
+
+            Label:
+                text: 'Add or Remove Student'
+                size_hint: None, None
+                size: 700, 50
+                pos: 0, 330
+
+            GridLayout:
+                id: add_del_stud
+                size_hint: None, None
+                size: 700, 330
+                pos: 0, 0
+                rows: 5
+                cols: 3
+                row_default_height: 40
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: 'Enter Student ID Number:'
+                    size_hint: None, None
+                    size: 230, 50
+                TextInput:
+                    id: student_ID_input
+                    multiline: False
+                    size_hint: None, None
+                    size: 230, 50
+                Button:
+                    id: student_add_btn
+                    text: 'Add Student'
+                    size_hint: None, None
+                    size: 230, 50
+                    on_release: root.add_student()
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+                Label:
+                    text: ''
+                    size_hint: None, None
+                    size: 230, 50
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # GridLayout:
+        #     Label:
+        #         size: 240, 100
+        #         size_hint: None, None
+        #         pos: 0, 780
+        #         text: "Student Name"
+        #
+        #     Label:
+        #         size: 240, 100
+        #         size_hint: None, None
+        #         pos: 0, 780
+        #         text: "Assignment Name"
+        #
+        #     Label:
+        #         size: 240, 100
+        #         size_hint: None, None
+        #         pos: 0, 780
+        #         text: "Grade Assigned"
+        #
+        #     Label:
+        #         size: 240, 100
+        #         size_hint: None, None
+        #         pos: 0, 780
+        #         text: "Input New Grade"
+        #
+        #     Label:
+        #         size: 240, 100
+        #         size_hint: None, None
+        #         pos: 0, 780
+        #         text: "Update"
